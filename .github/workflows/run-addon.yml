@@ -1,6 +1,8 @@
-
 name: Run Add-On
 on: repository_dispatch
+
+env:
+  TAHOE_PASSWORD: ${{ secrets.TAHOE_PASSWORD }}
 
 jobs:
   Run-Add-On:

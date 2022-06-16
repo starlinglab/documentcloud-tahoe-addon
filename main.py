@@ -1,41 +1,17 @@
-"""
-This is a hello world add-on for DocumentCloud.
+import os
 
-It demonstrates how to write a add-on which can be activated from the
-DocumentCloud add-on system and run using Github Actions.  It receives data
-from DocumentCloud via the request dispatch and writes data back to
-DocumentCloud using the standard API
-"""
-
+import requests
 from documentcloud.addon import AddOn
 
+SERVER = "https://example.com"  # No ending slash
+PASSWORD = os.environ["TAHOE_PASSWORD"]  # For server basicauth
 
-class HelloWorld(AddOn):
-    """An example Add-On for DocumentCloud."""
 
+class Tahoe(AddOn):
     def main(self):
-        """The main add-on functionality goes here."""
-        # fetch your add-on specific data
-        name = self.data.get("name", "world")
-
-        self.set_message("Hello World start!")
-
-        # add a hello note to the first page of each selected document
-        if self.documents:
-            for document in self.client.documents.list(id__in=self.documents):
-                document.annotations.create(f"Hello {name}!", 0)
-        elif self.query:
-            documents = self.client.documents.search(self.query)[:3]
-            for document in documents:
-                document.annotations.create(f"Hello {name}!", 0)
-
-        with open("hello.txt", "w+") as file_:
-            file_.write("Hello world!")
-            self.upload_file(file_)
-
-        self.set_message("Hello World end!")
-        self.send_mail("Hello World!", "We finished!")
+        for doc_id in self.documents:
+            pass
 
 
 if __name__ == "__main__":
-    HelloWorld().main()
+    Tahoe().main()
