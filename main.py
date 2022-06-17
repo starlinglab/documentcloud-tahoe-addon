@@ -1,11 +1,13 @@
 import os
+import json
 
 import requests
 from documentcloud.addon import AddOn
 
 SERVER = "https://tahoe.starlinglab.org"  # No ending slash
-PASSWORD = os.environ["TAHOE_PASSWORD"]  # For server basicauth
-TAHOE_DIR = os.environ["TAHOE_DIR"].replace(":", "%3A")  # Root dircap, URL encoded
+SECRETS = json.loads(os.environ["TOKEN"])
+PASSWORD = SECRETS[0]  # For server basicauth
+TAHOE_DIR = SECRETS[1].replace(":", "%3A")  # Root dircap, URL encoded
 
 
 class Tahoe(AddOn):

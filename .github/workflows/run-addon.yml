@@ -8,3 +8,6 @@ env:
 jobs:
   Run-Add-On:
     uses: MuckRock/documentcloud-addon-workflows/.github/workflows/run-addon.yml@v1
+    secrets:
+      # Hack to pass in multiple secrets: encode as JSON
+      token: '["${{ secrets.TAHOE_PASSWORD }}", "${{ secrets.TAHOE_DIR }}"]'
