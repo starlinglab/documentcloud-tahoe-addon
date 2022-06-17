@@ -16,6 +16,7 @@ class Tahoe(AddOn):
                 f"{SERVER}/uri/{TAHOE_DIR}/{str(document.id)}-{document.slug}.pdf",
                 auth=("user", PASSWORD),
                 timeout=10,
+                data=document.pdf,
             )
             if r.status_code not in [200, 201]:
                 self.set_message(f"Uploading failed with status code {r.status_code}")
