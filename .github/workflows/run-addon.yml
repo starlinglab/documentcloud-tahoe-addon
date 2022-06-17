@@ -3,6 +3,7 @@ on: repository_dispatch
 
 env:
   TAHOE_PASSWORD: ${{ secrets.TAHOE_PASSWORD }}
+  TAHOE_DIR: ${{ secrets.TAHOE_DIR }}
 
 jobs:
   Run-Add-On:
